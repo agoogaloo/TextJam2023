@@ -1,7 +1,0 @@
-import World
-
-print("starting")
-
-
-
-   
