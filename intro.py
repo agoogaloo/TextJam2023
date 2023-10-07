@@ -1,4 +1,5 @@
 import battle
+import shop
 from enemy import Enemy
 from player import Player
 
@@ -17,5 +18,6 @@ before everything is destroyed. (-enter to start-)""")
 
     input()
     player = Player(name,[0,1,0,2,0,0])
-    battle.makeBattle(player, Enemy())
+    shop.openShop(player)
+    #battle.makeBattle(player, Enemy())
 

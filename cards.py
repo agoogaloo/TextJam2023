@@ -4,11 +4,17 @@ def attack(p):
 
 def heal(p):
     p.heal(5)
-def explosion(p):
-    p.attack(999)
 
-names = ["attack","heal", "Crimson Demon"]
-effects = ["DMG: 5 damage\n","heal 5 health", "DMG: 999\ncreates a perfect\nexplosion"]
+def explosion(p):
+    p.attack(99)
+    
+
+def random(p):
+    pass
+
+
+names = ["Attack","heal", "Crimson Demon"]
+effects = ["DMG: 5 damage\n","heal 5 health", "DMG: 99\ncreates a perfect\nexplosion"]
 spells = ["pow!", 
 "restore", 
 """Summon before me the root
