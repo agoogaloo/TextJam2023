@@ -4,13 +4,19 @@ def attack(p):
 
 def heal(p):
     p.heal(5)
-def test(p):
-    print("Asjjahsfkdahfkjdsghslghsfdjh")
+def explosion(p):
+    p.attack(999)
 
-names = ["attack","heal", "test"]
-effects = ["deal 5 damage\n somthing else maybe \ntest","heal 5 health", "doesn't do \nanything really"]
-spells = ["pow!", "restore", "super omega test text\nof doom and destruction\npart 2 electric boogaloo"]
-functions = [attack, heal, test]
+names = ["attack","heal", "Crimson Demon"]
+effects = ["DMG: 5 damage\n","heal 5 health", "DMG: 999\ncreates a perfect\nexplosion"]
+spells = ["pow!", 
+"restore", 
+"""Summon before me the root
+of thy power hidden within
+the lands of the kingdom of
+demise! EEEXPLOSION!!!"""]
+
+functions = [attack, heal, explosion]
 
 
 

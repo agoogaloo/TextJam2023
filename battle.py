@@ -1,30 +1,54 @@
 import cards
+import gameOver
+import shop
 
-cardWidth = 25
+import time
 
-def makeBattle(player):
+cardWidth = 27
+
+def makeBattle(player, enemy):
     finished = False
+    
+    player.targetEnemy(enemy)
     #draw 3 random starting cards
     for i in range(3):
         player.draw()
 
+    exitFunc = None
+    
     while not finished:
-        printBattle(player.hand, player)
+        printBattle(player.hand, player, enemy)
+        startTime = time.time()
         text = input()
+        timeTaken = time.time()-startTime
+        enemy.doActions(timeTaken, player)
         doActions(text, player)
-        if text == "done!":
-            finished = True
 
-def printBattle(hand, player):
+        if player.health<=0:
+            finished = True
+            exitFunc = gameOver.finishGame
+        elif enemy.health<=0:
+            finished = True
+            exitFunc = shop.openShop
+
+    enemy.health=0
+    exitFunc(player)
+    
+
+        
+
+def printBattle(hand, player, enemy):
   
         #border = " "+"-"*((cardWidth+1)*len(hand)-1)+" "
-        border = " "+(("-"*cardWidth)+" ")*len(hand)
-        splitBorder = "|"+(("-"*cardWidth)+"|")*len(hand)
-        incantationHeader = "|"+((" "*6)+"-INCANTATION-"+" "*6+"|")*len(hand)
-        status = "  -STATUS-   HP: "+str(player.health)+"/"+str(player.maxHealth)
+        border = " "+(("═"*cardWidth)+" ")*len(hand)
+        incantationHeader = "║"+((" "*7)+"-INCANTATION-"+" "*7+"║")*len(hand)
+        status = "║  -STATUS-  HP: "+str(player.health)+"/"+str(player.maxHealth)
+        splitBorder = "║"+(("-"*cardWidth)+"║")*len(hand)
+        enemyStats = "║  -ENEMY STATS-  HP: "+str(enemy.health)+"/"+str(
+            enemy.maxHealth)+"  DMG: "+str(enemy.damage)+"  ATK SPD: "+str(enemy.attackSpeed)
 
         #creating the names of the cards
-        names = "|"
+        names = "║"
         for card in hand:
             nameSize = len(cards.names[card])
             spaceUsed =int((cardWidth-nameSize)/2)
@@ -32,7 +56,7 @@ def printBattle(hand, player):
             names+=cards.names[card]
             spaceUsed+=nameSize
             names+=" "*(cardWidth-spaceUsed)
-            names+="|" 
+            names+="║" 
 
         #creating effects row
     
@@ -43,15 +67,15 @@ def printBattle(hand, player):
         finishedText = False
         lineIndex = 0
         while not finishedText:
-            line = "|"
+            line = "║"
             finishedText= True
             for card in hand:
                 effectLine = effectLines[card]
                 if lineIndex>=len(effectLine):
-                    line+=" "*cardWidth+"|"
+                    line+=" "*cardWidth+"║"
                     continue
                 line+=effectLine[lineIndex]
-                line+=" "*(cardWidth-len(effectLine[lineIndex]))+"|"
+                line+=" "*(cardWidth-len(effectLine[lineIndex]))+"║"
                 finishedText = False
             if not finishedText:
                 effects.append(line)
@@ -66,22 +90,22 @@ def printBattle(hand, player):
         finishedText = False
         lineIndex = 0
         while not finishedText:
-            line = "|"
+            line = "║"
             finishedText= True
             for card in hand:
                 spellLine = spellLines[card]
                 if lineIndex>=len(spellLine):
-                    line+=" "*cardWidth+"|"
+                    line+=" "*cardWidth+"║"
                     continue
                 line+=spellLine[lineIndex]
-                line+=" "*(cardWidth-len(spellLine[lineIndex]))+"|"
+                line+=" "*(cardWidth-len(spellLine[lineIndex]))+"║"
                 finishedText = False
             if not finishedText:
                 spells.append(line)
             lineIndex+=1
             
         #adding all the lines into one array (creating the actual menu)
-        lines = [status,border,names,splitBorder]
+        lines = [border,status,enemyStats, border,names,splitBorder]
         for line in effects:
              lines.append(line)
         lines.append(splitBorder)
@@ -90,16 +114,13 @@ def printBattle(hand, player):
         for line in spells:
              lines.append(line)
         lines.append(border)
-        print("\n")
+        print("\n\n\n")
         for line in lines:
             print(line)
 
 def doActions(text, player):
     hand = player.hand
     for i in range(len(hand)-1,-1,-1):
-        print(i)
         if text == cards.spells[hand[i]].replace("\n"," "):
             player.useCard(i)
-        else :
-            print(text +"is different than \n"+cards.spells[hand[i]].replace("\n"," "))
         

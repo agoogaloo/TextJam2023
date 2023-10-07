@@ -2,27 +2,34 @@ import random
 import cards
 class Player:
 
-    def __init__(self, deck):
+    def __init__(self, name,deck):
+            self.name = name
             self.deck = deck
             self.hand = []
-
-            self.maxHealth = 15
+            self.maxHealth = 50
             self.health = self.maxHealth
+
+            self.enemy = None
+    def targetEnemy(self, enemy):
+         self.enemy = enemy
     def draw(self):   
         
         card = self.deck[random.randrange(0,len(self.deck))]
-        print("drawing card "+str(card))
         self.hand.append(card)
         
     def useCard(self, index):
-        print("using card number "+str(index))
         cards.functions[self.hand[index]](self)
         self.hand.pop(index)
         self.draw()
         
+    def damage(self, dmg):
+         self.health-= dmg
+         if self.health<=0:
+              print("you failed, and the world has been destroyed :(")
 
     def attack(self, dmg):
-        print("attack!")
+        if self.enemy:
+            self.enemy.hit(dmg)
 
 
     def heal(self, amount):
