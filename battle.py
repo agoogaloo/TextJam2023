@@ -4,7 +4,7 @@ import shop
 
 import time
 
-cardWidth = 27
+cardWidth = 25
 
 def makeBattle(player, enemy):
     finished = False
@@ -32,7 +32,7 @@ def makeBattle(player, enemy):
             exitFunc = shop.openShop
 
     enemy.health=0
-    exitFunc(player)
+    exitFunc(player, enemy.level)
     
 
         
@@ -41,7 +41,7 @@ def printBattle(hand, player, enemy):
   
         #border = " "+"-"*((cardWidth+1)*len(hand)-1)+" "
         border = " "+(("═"*cardWidth)+" ")*len(hand)
-        incantationHeader = "║"+((" "*7)+"-INCANTATION-"+" "*7+"║")*len(hand)
+        incantationHeader = "║"+((" "*6)+"-INCANTATION-"+" "*6+"║")*len(hand)
         status = "║  -STATUS-  HP: "+str(player.health)+"/"+str(player.maxHealth)
         splitBorder = "║"+(("-"*cardWidth)+"║")*len(hand)
         enemyStats = "║  -ENEMY STATS-  HP: "+str(enemy.health)+"/"+str(

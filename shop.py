@@ -9,7 +9,7 @@ border = " "+(("═"*cardWidth)+" ")*3
 incantationHeader = "║"+((" "*7)+"-INCANTATION-"+" "*7+"║")*3
 splitBorder = "║"+(("-"*cardWidth)+"║")*3
 
-def openShop(player):
+def openShop(player, level):
     finished = False
     options = createOptions()
     while not finished:
@@ -29,13 +29,14 @@ def openShop(player):
         print(" - type 'add <hero name> to add a candidate to your deck")
         print(" - type 'heal' to restore the world to max health")
         print(" - type 'health up' to increase max health by 10")
-        print(" - type 'remove <hero name>' to remove a candidate from your deck")    
+        if len(player.deck)>3:
+            print(" - type 'remove <hero name>' to remove a candidate from your deck")    
 
    
         text = input()
         finished = selectOption(text, player, options)
     player.hand = []
-    battle.makeBattle(player, Enemy())
+    battle.makeBattle(player, Enemy(level+1))
             
 
 def selectOption(text, player,options):
@@ -48,13 +49,13 @@ def selectOption(text, player,options):
         player.maxHealth+=10
         return True
         
-    elif text.lower().find("remove ")!=-1:
+    elif text.lower().find("remove ")!=-1 and len(player.deck)>3:
         text = text.replace("remove ", "")
         success = False
         for card in player.deck:
             if cards.names[card].lower()==text.lower():
                 print("removing card")
-                player.deck.remove(card)
+                player.removeFromDeck(card)
                 return True
         if not success:
             print("coundt find a "+text+" card in your deck")
@@ -63,9 +64,9 @@ def selectOption(text, player,options):
         text = text.replace("add ", "")
         #text = text.replace(" ", "")
         for card in options:
-             print("adding card")
-             if cards.names[card].lower()==text.lower:
-                  player.deck.append(card)
+             print("checkin card")
+             if cards.names[card].lower()==text.lower():
+                  player.addToDeck(card)
                   return True
     return False
          
@@ -73,7 +74,13 @@ def selectOption(text, player,options):
 def createOptions():
     options = []
     for i in range(3):
-        options.append(random.randrange(0,len(cards.names)))
+        done = False
+        card = 0
+        while not done:
+            card = random.randrange(0,len(cards.names))
+            if options.count(card)==0:
+                 done = True
+        options.append(card)    
     return options
 
 def printCards(hand):
@@ -104,8 +111,8 @@ def printCards(hand):
             if lineIndex>=len(effectLine):
                 line+=" "*cardWidth+"║"
                 continue
-            line+=effectLine[lineIndex]
-            line+=" "*(cardWidth-len(effectLine[lineIndex]))+"║"
+            line+=" "+effectLine[lineIndex]
+            line+=" "*(cardWidth-len(effectLine[lineIndex])-1)+"║"
             finishedText = False
         if not finishedText:
             effects.append(line)
@@ -127,8 +134,8 @@ def printCards(hand):
             if lineIndex>=len(spellLine):
                 line+=" "*cardWidth+"║"
                 continue
-            line+=spellLine[lineIndex]
-            line+=" "*(cardWidth-len(spellLine[lineIndex]))+"║"
+            line+=" "+spellLine[lineIndex]
+            line+=" "*(cardWidth-len(spellLine[lineIndex])-1)+"║"
             finishedText = False
         if not finishedText:
             spells.append(line)

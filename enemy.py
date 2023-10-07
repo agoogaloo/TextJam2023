@@ -2,27 +2,26 @@ import time
 
 
 class Enemy:
-    def __init__(self):
+    def __init__(self, level):
         self.name = "bad guy"
-        self.maxHealth = 30
+        self.maxHealth = 30+5*level
         self.health = self.maxHealth
-        self.damage = 2
+        self.damage = 2+level
         self.attackSpeed = 1
         self.overTime = -self.attackSpeed
+        self.level = level
 
 
     def hit(self, dmg):
         self.health-=dmg
 
     def doActions(self, time, player):
-        print("doing "+str(time)+" attacks + "+str(self.overTime)+" from last turn")
         time+=self.overTime
         while time>self.attackSpeed:
             self.attack(player)
             time-=self.attackSpeed
-            print(str(time)+"time left to simulate")
+           
         self.overTime = time
-        print(str(self.overTime)+" time left over")
        
     def attack(self, player):
         if self.health<=0:
