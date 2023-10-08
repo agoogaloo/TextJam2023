@@ -11,8 +11,8 @@ class Player:
             self.health = self.maxHealth
             self.shield = 0
             self.handSize = 3
-
             self.enemy = None
+            cards.setWorldName(name)
     def targetEnemy(self, enemy):
          self.enemy = enemy
     def draw(self): 
@@ -38,8 +38,9 @@ class Player:
 
     def useCard(self, index):
         function = cards.functions[self.hand[index]]
-        self.hand.pop(index)
+        
         oneShot = function(self)
+        self.hand.pop(index)
         return oneShot
     
         
@@ -55,6 +56,7 @@ class Player:
             print("you failed, and the world has been destroyed :(")
 
     def attack(self, dmg):
+        print("attacking with "+str(dmg))
         if self.enemy:
             self.enemy.hit(dmg)
 

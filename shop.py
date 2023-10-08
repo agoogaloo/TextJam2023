@@ -13,7 +13,7 @@ tips = ["If you have multiple of the same hero in your hand, you can summon all 
         "Enemies will wait for you to do something before they start attacking. What a gentleman",
         "Salsa goes really well with grilled cheese. Try it out sometime!",
         "Making your deck bigger doesn't always mean it's better.",
-        "Enemies don't stop attacking, even when you're summoning a hero. Don't stop typing!"]
+        "Enemies don't stop attacking, even while you're summoning a hero. Don't stop typing!"]
 
 def openShop(player, level):
     finished = False
@@ -25,10 +25,12 @@ def openShop(player, level):
         print(border)
         
         #printing the current deck
-        print("your currently selected candidates are:")    
+        print("your current deck of candidates is:")    
         for card in player.deck:
             print(" -"+cards.names[card]+": "+cards.effects[card].replace("\n", " "))
-        print(player.name+" has "+str(player.health)+"/"+str(player.maxHealth)+" HP")
+        print("─"*35)
+        line = player.name+" HP: "+str(player.health)+"/"+str(player.maxHealth)
+        print(line+" "*(35-len(line))+"|")
         printCards(options)
        
         print("\n--CHOOSE AN OPTION--")

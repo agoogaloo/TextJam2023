@@ -6,7 +6,13 @@ from player import Player
 
 def start():
     print("What do you want to name this world?")
-    name = input("")
+    valid = False
+    while not valid:
+        name = input("")
+        if len(name)>25:
+            print("Too long. The name needs to be less than 25 characters")
+        else:
+            valid = True
     print("\n\n\nWelcome to "+name+""". The great demon king has risen once again, 
 and you must summon legendary heros to save it. Unfortunately they're 
 so weak they won't be able to more than one thing before they're slain.
@@ -34,7 +40,7 @@ what types of heros are you looking for?
     while not validInput:
         text = input()
         if text.lower()=="1" or text.lower()=="Basic Bunch".lower():
-            player = Player(name,[1,1,2,4],50)
+            player = Player(name,[1,1,2,6],50)
             validInput = True
 
         elif text.lower()=="2" or text.lower()=="Crab Commander".lower():
@@ -49,7 +55,7 @@ what types of heros are you looking for?
             
             validInput = True
         elif text=="test":
-            player = Player(name,[1,3,13],100)
+            player = Player(name,[1,3,13],10)
             validInput = True
         else:
             print("enter the name or number of the group you want to select")

@@ -49,13 +49,13 @@ def printBattle(hand, player, enemy):
         #border = " "+"-"*((cardWidth+1)*len(hand)-1)+" "
         border = " "+(("═"*cardWidth)+" ")*len(hand)
         incantationHeader = "║"+((" "*6)+"-INCANTATION-"+" "*6+"║")*len(hand)
-        status = "  |  -STATUS-  HP: "+str(player.health)+"/"+str(player.maxHealth)+"   SHIELD: "+str(player.shield)
+        status = "  |  -"+player.name.upper()+"-  HP: "+str(player.health)+"/"+str(player.maxHealth)+"   SHIELD: "+str(player.shield)
         splitBorder = "║"+(("-"*cardWidth)+"║")*len(hand)
         enemyStats = "  |  -ENEMY STATS-  HP: "+str(enemy.health)+"/"+str(
             enemy.maxHealth)+"  DMG: "+str(enemy.damage)+"  ATK SPD: "+str(enemy.attackSpeed)
-        enemyStats+=" "*(55-len(enemyStats))+"|"
-        status+=" "*(55-len(status))+"|"
-        statusBorder = "   "+"─"*52
+        enemyStats+=" "*(58-len(enemyStats))+"|"
+        status+=" "*(58-len(status))+"|"
+        statusBorder = "   "+"─"*55
 
         #creating the names of the cards
         names = "║"
