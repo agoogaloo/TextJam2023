@@ -11,7 +11,7 @@ def finishGame(player, level):
     print("your deck of candidates was:")
     for card in player.deck:
         print(" -"+cards.names[card])
-        print("     -"+cards.effects[card].replace("\n", " "))
+        print("     -"+cards.effects[card].replace("  ","").replace("\n", " "))
     print("─"*65)
     print("you reached level "+str(level))
     print("─"*65)

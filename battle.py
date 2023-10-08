@@ -17,9 +17,10 @@ def makeBattle(player, enemy):
         player.draw()
 
     exitFunc = None
-    
+    enemyAttack = enemy.getWaitingQuote()
     while not finished:
         printBattle(player.hand, player, enemy)
+        print(enemyAttack)
         startTime = time.time()
         text = input()
         timeTaken = time.time()-startTime
@@ -28,7 +29,7 @@ def makeBattle(player, enemy):
             timeTaken = 0
             starting = False
         #enemy attack
-        enemy.doActions(timeTaken, player)
+        enemyAttack = enemy.doActions(timeTaken, player)
         #player attacks
         doActions(text, player)
 
@@ -37,7 +38,7 @@ def makeBattle(player, enemy):
             exitFunc = gameOver.finishGame
         elif enemy.health<=0:
             finished = True
-            if enemy.name=="Demon King":
+            if enemy.name=="The Demon King":
                 exitFunc = win.winGame
             else:
                 exitFunc = shop.openShop
