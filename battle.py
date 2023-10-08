@@ -1,6 +1,7 @@
 import cards
 import gameOver
 import shop
+import win
 
 import time
 
@@ -36,7 +37,11 @@ def makeBattle(player, enemy):
             exitFunc = gameOver.finishGame
         elif enemy.health<=0:
             finished = True
-            exitFunc = shop.openShop
+            if enemy.name=="Demon King":
+                exitFunc = win.winGame
+            else:
+                exitFunc = shop.openShop
+        
 
     enemy.health=0
     exitFunc(player, enemy.level)
@@ -51,7 +56,7 @@ def printBattle(hand, player, enemy):
         incantationHeader = "║"+((" "*6)+"-INCANTATION-"+" "*6+"║")*len(hand)
         status = "  |  -"+player.name.upper()+"-  HP: "+str(player.health)+"/"+str(player.maxHealth)+"   SHIELD: "+str(player.shield)
         splitBorder = "║"+(("-"*cardWidth)+"║")*len(hand)
-        enemyStats = "  |  -ENEMY STATS-  HP: "+str(enemy.health)+"/"+str(
+        enemyStats = "  |  -"+enemy.name.upper()+"-  HP: "+str(enemy.health)+"/"+str(
             enemy.maxHealth)+"  DMG: "+str(enemy.damage)+"  ATK SPD: "+str(enemy.attackSpeed)
         enemyStats+=" "*(58-len(enemyStats))+"|"
         status+=" "*(58-len(status))+"|"

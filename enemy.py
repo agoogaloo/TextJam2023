@@ -1,9 +1,18 @@
-import time
 
+import random
+
+easyNames = ["slime", "goblin", "anomura"]
+hardNames = ["Brachyura", "dragon", "demon"]
 
 class Enemy:
     def __init__(self, level):
-        self.name = "bad guy"
+        if level==9:
+            self.name = "Demon King"
+        elif level<=4:
+            self.name = easyNames[random.randrange(0,len(easyNames))]
+        else:
+            self.name = hardNames[random.randrange(0,len(hardNames))]
+        
         self.maxHealth = 30+5*level
         self.health = self.maxHealth
         self.damage = 2+int(level/2)

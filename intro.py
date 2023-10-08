@@ -44,11 +44,11 @@ what types of heros are you looking for?
             validInput = True
 
         elif text.lower()=="2" or text.lower()=="Crab Commander".lower():
-            player = Player(name,[7,7,9,10],40)
+            player = Player(name,[8,8,10,11],40)
             validInput = True
 
         elif text.lower()=="3" or text.lower()=="Chaotic Conjurer".lower():
-            deck = [11,12]
+            deck = [12,13]
             for i in range(random.randrange(0,4)):
                 deck.append(random.randrange(0,len(cards.names)))
             player = Player(name,deck,random.randrange(30,90))
