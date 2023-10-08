@@ -2,13 +2,15 @@ import random
 import cards
 class Player:
 
-    def __init__(self, name,deck):
+    def __init__(self, name,deck, maxHealth):
             self.name = name
             self.deck = deck
             self.cardsToDraw = deck.copy()
             self.hand = []
-            self.maxHealth = 50
+            self.maxHealth = maxHealth
             self.health = self.maxHealth
+            self.shield = 0
+            self.handSize = 3
 
             self.enemy = None
     def targetEnemy(self, enemy):
@@ -31,24 +33,34 @@ class Player:
         self.cardsToDraw.append(card)
 
     def removeFromDeck(self, card):
-        self.deck.remove(card)
+        if self.deck.count(card)>0:
+            self.deck.remove(card)
         if self.cardsToDraw.count(card)>0:
             self.cardsToDraw.remove(card)
 
     def useCard(self, index):
-        cards.functions[self.hand[index]](self)
+        oneShot = cards.functions[self.hand[index]](self)
         self.hand.pop(index)
+        return oneShot
     
         
     def damage(self, dmg):
-         self.health-= dmg
-         if self.health<=0:
-              print("you failed, and the world has been destroyed :(")
+        print("dealaing "+str(dmg)+" to "+str(self.shield)+" shield")
+        self.shield-=dmg
+
+        if self.shield<0:
+            self.health+= self.shield
+            self.shield = 0
+
+        if self.health<=0:
+            print("you failed, and the world has been destroyed :(")
 
     def attack(self, dmg):
         if self.enemy:
             self.enemy.hit(dmg)
 
+    def addShield(self, amount):
+         self.shield+=amount
 
     def heal(self, amount):
         print("heal!")

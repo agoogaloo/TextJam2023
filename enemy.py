@@ -6,8 +6,8 @@ class Enemy:
         self.name = "bad guy"
         self.maxHealth = 30+5*level
         self.health = self.maxHealth
-        self.damage = 2+level
-        self.attackSpeed = 1
+        self.damage = 2+int(level/2)
+        self.attackSpeed = 2-level/10
         self.overTime = -self.attackSpeed
         self.level = level
 

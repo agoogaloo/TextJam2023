@@ -9,13 +9,19 @@ border = " "+(("═"*cardWidth)+" ")*3
 incantationHeader = "║"+((" "*7)+"-INCANTATION-"+" "*7+"║")*3
 splitBorder = "║"+(("-"*cardWidth)+"║")*3
 
+tips = ["If you have multiple of the same hero in your hand, you can summon them all at once!",
+        "Enemies will wait for you to do something before they start attacking. What a gentleman",
+        "Salsa goes really well with grilled cheese. Try it out sometime!",
+        "Bigger decks aren't always stronger. They do let you get more health though",
+        "Enemies don't stop attacking, even when you're summoning a hero. Don't stop typing!"]
+
 def openShop(player, level):
     finished = False
     options = createOptions()
     while not finished:
         print("\n\n\n\n\n"+border)
-        print("   -welcome to the shop-")
-        print(" here you can find heros you will be able to summon later")
+        print("   -WELCOME TO THE SHOP-")
+        print("TIP: "+tips[random.randrange(0,len(tips))])
         print(border)
         
         #printing the current deck
@@ -26,27 +32,23 @@ def openShop(player, level):
         printCards(options)
        
         print("\n--CHOOSE AN OPTION--")
-        print(" - type 'add <hero name> to add a candidate to your deck")
-        print(" - type 'heal' to restore the world to max health")
-        print(" - type 'health up' to increase max health by 10")
+        print(" - type 'add <hero name> to add a candidate to your deck and heal to max hp")
+        print(" - type 'health up' to increase max health by "+str(10*level))
         if len(player.deck)>3:
             print(" - type 'remove <hero name>' to remove a candidate from your deck")    
 
    
         text = input()
-        finished = selectOption(text, player, options)
+        finished = selectOption(text, player, options, level)
     player.hand = []
+    player.shield = 0
     battle.makeBattle(player, Enemy(level+1))
             
 
-def selectOption(text, player,options):
-    if text.lower()=="heal":
-        print("healing")
-        player.health = player.maxHealth
-        return True
-    elif text.lower()=="health up":
+def selectOption(text, player,options, level):
+    if text.lower()=="health up":
         print("HP++")
-        player.maxHealth+=10
+        player.maxHealth+=10*level
         return True
         
     elif text.lower().find("remove ")!=-1 and len(player.deck)>3:
@@ -67,6 +69,7 @@ def selectOption(text, player,options):
              print("checkin card")
              if cards.names[card].lower()==text.lower():
                   player.addToDeck(card)
+                  player.health = player.maxHealth
                   return True
     return False
          
