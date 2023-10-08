@@ -19,13 +19,11 @@ class Player:
         if len(self.cardsToDraw)==0:
             self.cardsToDraw = self.deck.copy()
             print("reshuffling")
-        print(self.cardsToDraw) 
-        print("deck:"+str(self.deck))
         index = random.randrange(0,len(self.cardsToDraw))
         card = self.cardsToDraw[index]
         self.hand.append(card)
         self.cardsToDraw.pop(index)
-        print(self.cardsToDraw)
+       
        
        
     def addToDeck(self, card):
@@ -39,8 +37,9 @@ class Player:
             self.cardsToDraw.remove(card)
 
     def useCard(self, index):
-        oneShot = cards.functions[self.hand[index]](self)
+        function = cards.functions[self.hand[index]]
         self.hand.pop(index)
+        oneShot = function(self)
         return oneShot
     
         

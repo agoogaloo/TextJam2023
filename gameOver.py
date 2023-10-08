@@ -7,4 +7,6 @@ def finishGame(player, level):
     print("\n\n\n\n\you failed to destroy the demon king, and the world has been destroyed")
     print("your heros were:"+str(heroes))
     print("you reached level "+str(level))
+
+    input()
     

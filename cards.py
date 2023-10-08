@@ -23,6 +23,35 @@ def barbarian(p):
     p.attack(p.shield)
     p.shield = 0
     p.draw()
+def allOutAttack(p):
+    
+    oneShotUsed = False
+    for i in range(len(p.hand)-1,-1,-1):
+        print("indexe "+str(i))
+        #stopping it from using itself too many times
+        if functions[p.hand[i]]==allOutAttack:
+            p.hand.pop(i)
+            p.draw()
+            print("skipping self")
+            cardSkipped = True
+            continue
+        card = p.hand[i]
+        print("using "+names[card])
+        if (not (oneShotUsed and functions[p.hand[i]]==bigHand)) and p.useCard(i):
+            oneShotUsed = True
+            print("used a bighands")
+
+        if oneShotUsed:
+            for j in range(p.hand.count(names.index("Big Hands"))):
+                p.hand.remove(names.index("Big Hands"))
+                p.draw()
+
+    p.draw()
+    return True
+            
+
+        
+
 
 def explosion(p):
     p.attack(99)
@@ -93,12 +122,13 @@ def randName(length):
 
 
 
-names = ["Protagonist","Knight","Healer", "Defender","Barbarian", "Crimson Demon","Crabulass", "Crabulord","Crab Nest", "Crab","Autotainment",
+names = ["Protagonist","Knight","Healer","Phantom Theif", "Defender","Barbarian", "Crimson Demon","Crabulass", "Crabulord","Crab Nest", "Crab","Autotainment",
          "Shuffle", "Big Hands"]
-functions = [protagonist,knight, healer,defender,barbarian, explosion, crablass, crabLord, crabNest,crab, randCard,handShuffle, 
+functions = [protagonist,knight, healer,allOutAttack,defender,barbarian, explosion, crablass, crabLord, crabNest,crab, randCard,handShuffle, 
              bigHand]
 
-effects = ["Deals 5 damage per unique\ncard in your deck\n -The power of friendship","DMG: 5","Heal: 5 HP","gives 12 shield",
+effects = ["Deals 5 damage per unique\ncard in your deck\n -The power of friendship","DMG: 5","Heal: 5 HP",
+"Uses all of the cards\nin your hand","gives 12 shield",
 "Deals damage = shield\nRemoves all shield", "DMG: 99\nCreates the perfect\nexplosion",
 "Deals 10 damage per crab\nin your hand",
 "Sacrifices all crab cards\nin your deck, dealing 5\ndamage each\nAdds a crab to your deck","Adds 2 crab cards to your\ndeck\n -crabs for the crab god", 
@@ -106,7 +136,7 @@ effects = ["Deals 5 damage per unique\ncard in your deck\n -The power of friends
 "Turns your hand into\nrandom cards", "Increases hand size by 1\nCard is removed from deck\nafteruse"
 ]
 spells = ["so this is the Demon\nKing's power","hiya", 
-"restore", "protection","charge!",
+"restore","time for an all out\nattack", "protection","charge!",
 """Summon before me the root
 of thy power hidden
 within the lands of the
