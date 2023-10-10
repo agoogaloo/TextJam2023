@@ -2,9 +2,11 @@ import intro
 import shop
 import cards
 
-def winGame(player, level):
+def winGame(player, level, time):
     print("\n\n\n\n"+"═"*85)
     print(player.name+" is finally safe from the Demon King, and only a few heros died in the process")
+    if time!=-1:
+         print("you won in "+str(time)+"seconds")
     print("─"*85)
     print(" HALL OF HEROES:")
     for card in player.deck:

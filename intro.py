@@ -5,7 +5,7 @@ from enemy import Enemy
 from player import Player
 
 def start():
-    print(" ─══ THAT TIME I REINCARNATED A BUNCH OF HEROES NITO A TYPING GAME ══─ \n\nWhat do you want to name this world?")
+    print(" ─══ THAT TIME I REINCARNATED A BUNCH OF HEROES INTO A TYPING GAME ══─ \n\nWhat do you want to name this world?")
     valid = False
     while not valid:
         name = input("")
@@ -41,12 +41,13 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
     - random health and heros
 4) Hard Mode
     - small hand size
-    - less health
-    - idk if this is even possible""")
+    - less health""")
 
     validInput = False
+    timer = False
     while not validInput:
         print("enter the name or number of the group you want to select")
+
         text = input()
         if text.lower()=="1" or text.lower()=="Basic Bunch".lower():
             player = Player(name,[1,2,16],50)
@@ -66,10 +67,16 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
             player.handSize = 2
             validInput = True
         elif text=="test":
-            player = Player(name,[3,1,15],100)
+            player = Player(name,[5,6,6],100)
             validInput = True
+        elif text.lower() =="speedrun":
+            timer = True
+            print("speedrun timer activated (starts when you select a group)")
         
           
     #shop.openShop(player)
-    battle.makeBattle(player, Enemy(1))
+    if timer:
+        battle.makeBattle(player, Enemy(1), 0.0)
+    else:
+        battle.makeBattle(player, Enemy(1), -1)
 

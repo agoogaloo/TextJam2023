@@ -25,7 +25,7 @@ def barbarian(p):
     p.draw()
 
 def druid(p):
-    p.shield+=int(1.5*len(spells[names.index("Druid")]))
+    p.shield+=druidDamage(p.name)
     p.draw()
 def allOutAttack(p):
     
@@ -171,7 +171,16 @@ randName(5),
 
 def setWorldName(name):
     spells[names.index("Druid")]=name
-    effects[names.index("Druid")] = "Adds "+str(int(1.5*len(spells[names.index("Druid")])))+" shield"
+    effects[names.index("Druid")] = "Adds "+str(druidDamage(name))+" shield"
+def druidDamage(name):
+    amount = len(name)
+    for c in name:
+        if c.isupper():
+            amount+=1
+        if not c.isalpha():
+            amount+=2
+    return amount
+
 
 
 

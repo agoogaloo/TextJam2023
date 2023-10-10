@@ -16,14 +16,17 @@ tips = ["If you have multiple of the same hero in your hand, you can summon all 
         "Enemies don't stop attacking, even while you're summoning a hero. Don't stop typing!",
         "just because you only have 1 of a card in your deck, doesn't mean you can't have more than 1 in your hand",
         "Theres no linit to your shield, but it resets every battle",
-        "Your shield will block any damage that would normally go to your health"]
+        "Your shield will block any damage that would normally go to your health",
+        "Type 'speedrun' when selecting a team to show the speedrun timer"]
 
-def openShop(player, level):
+def openShop(player, level, timer):
     finished = False
     options = createOptions()
     while not finished:
         print("\n\n\n\n\n"+border)
         print("   -WELCOME TO THE SHOP-")
+        if timer!=-1:
+             print("  -TIME: "+str(timer))
         print("TIP: "+tips[random.randrange(0,len(tips))])
         print(border)
         
@@ -47,7 +50,7 @@ def openShop(player, level):
         finished = selectOption(text, player, options, level)
     player.hand = []
     player.shield = 0
-    battle.makeBattle(player, Enemy(level+1))
+    battle.makeBattle(player, Enemy(level+1), timer)
             
 
 def selectOption(text, player,options, level):

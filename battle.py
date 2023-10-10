@@ -8,7 +8,7 @@ import time
 
 cardWidth = 25
 
-def makeBattle(player, enemy):
+def makeBattle(player, enemy, timer):
     finished = False
     starting = True
     
@@ -20,11 +20,13 @@ def makeBattle(player, enemy):
     exitFunc = None
     enemyAttack = enemy.getWaitingQuote()
     while not finished:
-        printBattle(player.hand, player, enemy)
+        printBattle(player.hand, player, enemy, timer)
         print(enemyAttack)
         startTime = time.time()
         text = input()
         timeTaken = time.time()-startTime
+        if timer!=-1:
+            timer+=timeTaken
         #not letting the enemy attack until you have done something
         if starting:
             timeTaken = 0
@@ -46,12 +48,12 @@ def makeBattle(player, enemy):
         
 
     enemy.health=0
-    exitFunc(player, enemy.level)
+    exitFunc(player, enemy.level, timer)
     
 
         
 
-def printBattle(hand, player, enemy):
+def printBattle(hand, player, enemy, time):
   
         #border = " "+"-"*((cardWidth+1)*len(hand)-1)+" "
         border = " "+(("═"*cardWidth)+" ")*len(hand)
@@ -136,7 +138,10 @@ def printBattle(hand, player, enemy):
         lines.append(status)
         lines.append(enemyStats)
         lines.append(statusBorder)
-        print("\n\n\n  -- LEVEL "+str(enemy.level)+" --")
+        print("\n\n\n")
+        if time!=-1:
+            print("TIME: "+str(time))
+        print("  -- LEVEL "+str(enemy.level)+" --")
         for line in lines:
             print(line)
 
