@@ -14,7 +14,9 @@ tips = ["If you have multiple of the same hero in your hand, you can summon all 
         "Salsa goes really well with grilled cheese. Try it out sometime!",
         "Making your deck bigger doesn't always mean it's better.",
         "Enemies don't stop attacking, even while you're summoning a hero. Don't stop typing!",
-        "just because you only have 1 of a card in your deck, doesn't mean you can't have more than 1 in your hand"]
+        "just because you only have 1 of a card in your deck, doesn't mean you can't have more than 1 in your hand",
+        "Theres no linit to your shield, but it resets every battle",
+        "Your shield will block any damage that would normally go to your health"]
 
 def openShop(player, level):
     finished = False
@@ -36,7 +38,7 @@ def openShop(player, level):
        
         print("\n--CHOOSE AN OPTION--")
         print(" - type 'add <hero name> to add a candidate to your deck and heal to max hp")
-        print(" - type 'health up' to increase max health by "+str(5+5*level))
+        print(" - type 'health up' to increase max health by "+str(15))
         if len(player.deck)>3:
             print(" - type 'remove <hero name>' to remove a candidate from your deck")    
 
@@ -51,7 +53,7 @@ def openShop(player, level):
 def selectOption(text, player,options, level):
     if text.lower()=="health up":
         print("HP++")
-        player.maxHealth+=5+5*level
+        player.maxHealth+=15
         return True
         
     elif text.lower().find("remove ")!=-1 and len(player.deck)>3:

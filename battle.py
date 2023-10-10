@@ -2,6 +2,7 @@ import cards
 import gameOver
 import shop
 import win
+import enemy as Enemy
 
 import time
 
@@ -38,7 +39,7 @@ def makeBattle(player, enemy):
             exitFunc = gameOver.finishGame
         elif enemy.health<=0:
             finished = True
-            if enemy.name=="The Demon King":
+            if enemy.level==Enemy.bossLevel:
                 exitFunc = win.winGame
             else:
                 exitFunc = shop.openShop
@@ -58,10 +59,12 @@ def printBattle(hand, player, enemy):
         status = "  |  -"+player.name.upper()+"-  HP: "+str(player.health)+"/"+str(player.maxHealth)+"   SHIELD: "+str(player.shield)
         splitBorder = "║"+(("-"*cardWidth)+"║")*len(hand)
         enemyStats = "  |  -"+enemy.name.upper()+"-  HP: "+str(enemy.health)+"/"+str(
-            enemy.maxHealth)+"  DMG: "+str(enemy.damage)+"  ATK SPD: "+str(enemy.attackSpeed)
-        enemyStats+=" "*(58-len(enemyStats))+"|"
-        status+=" "*(58-len(status))+"|"
-        statusBorder = "   "+"─"*55
+            enemy.maxHealth)+"  ATK: "+str(enemy.damage)+" DMG/{:.1f} SEC".format(enemy.attackSpeed)
+        if enemy.overTime<0:
+            enemyStats+="  STN: {:.1f}".format(-enemy.overTime)
+        enemyStats+=" "*(63-len(enemyStats))+"|"
+        status+=" "*(63-len(status))+"|"
+        statusBorder = "   "+"─"*60
 
         #creating the names of the cards
         names = "║"

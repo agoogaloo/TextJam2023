@@ -3,9 +3,9 @@ import shop
 import cards
 
 def winGame(player, level):
-    print("\n\n\n\n"+"═"*90)
+    print("\n\n\n\n"+"═"*85)
     print(player.name+" is finally safe from the Demon King, and only a few heros died in the process")
-    print("─"*65)
+    print("─"*85)
     print(" HALL OF HEROES:")
     for card in player.deck:
             print(" -"+cards.names[card]+": "+cards.effects[card].replace("  ","").replace("\n", " "))

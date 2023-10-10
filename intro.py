@@ -29,33 +29,33 @@ what types of heros are you looking for?
     - very average heros, with average stats
 2) Crab Commander:
     - lots of crabs
-    - lower health
+    - more health
     - did you know crabs are turing complete
 3) Chaotic Conjurer:
     - embrace the randomness
-    - random stats and heros
+    - random health and heros
           """)
 
     validInput = False
     while not validInput:
         text = input()
         if text.lower()=="1" or text.lower()=="Basic Bunch".lower():
-            player = Player(name,[1,1,2,6],50)
+            player = Player(name,[1,2,16],50)
             validInput = True
 
         elif text.lower()=="2" or text.lower()=="Crab Commander".lower():
-            player = Player(name,[8,8,10,11],40)
+            player = Player(name,[8,8,10,11],60)
             validInput = True
 
         elif text.lower()=="3" or text.lower()=="Chaotic Conjurer".lower():
             deck = [12,13]
             for i in range(random.randrange(0,4)):
                 deck.append(random.randrange(0,len(cards.names)))
-            player = Player(name,deck,random.randrange(30,90))
+            player = Player(name,deck,random.randrange(30,100))
             
             validInput = True
         elif text=="test":
-            player = Player(name,[1,3,13],10)
+            player = Player(name,[3,1,15],100)
             validInput = True
         else:
             print("enter the name or number of the group you want to select")

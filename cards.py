@@ -7,7 +7,7 @@ def protagonist(p):
     p.draw()
 
 def knight(p):
-    p.attack(5)
+    p.attack(8)
     p.draw()
 
 def healer(p):
@@ -32,7 +32,7 @@ def allOutAttack(p):
     oneShotUsed = False
     for i in range(len(p.hand)-1,-1,-1):
         print("indexe "+str(i))
-        #stopping it from using itself too many times
+        #stopping it from using itself
         if functions[p.hand[i]]==allOutAttack:
             p.hand.pop(i)
             p.draw()
@@ -115,21 +115,30 @@ def bigHand(p):
     p.draw()
     return True
 
+def stun(p):
+    p.stun(1.5)
+    p.draw()
+
+def quickAttack(p):
+    p.attack(3)
+    p.draw()
 
 def randName(length):
     characters = string.ascii_letters + string.digits + string.punctuation
     newSpell = ''.join(random.choice(characters) for _ in range(length))
     newSpell = newSpell.replace(" ","")
     return newSpell
+
+
     
 
 
-names = ["Protagonist","Knight","Healer","Phantom Theif", "Defender","Barbarian","Druid", "Crimson Demon","Crabs in a Trench Coat", "Crabulord","Crab Nest", "Crab","Autotainment",
-         "Shuffle", "Big Hands"]
-functions = [protagonist,knight, healer,allOutAttack,defender,barbarian,druid, explosion, crabCoat, crabLord, crabNest,crab, randCard,handShuffle, 
-             bigHand]
+names = ["Protagonist","Knight","Healer","Phantom Theif", "Defender","Barbarian","Druid", "Crimson Demon","Crabs in a Trench Coat", 
+         "Crabulord","Crab Nest", "Crab","Autotainment","Shuffle", "Big Hands", "Ice Wizard","Rogue"]
+functions = [protagonist,knight, healer,allOutAttack,defender,barbarian,druid, explosion, crabCoat, crabLord, crabNest,crab, 
+             randCard,handShuffle, bigHand,stun,quickAttack]
 
-effects = ["Deals 5 damage per unique\ncard in your deck\n-The power of friendship","DMG: 5","Heal: 5 HP",
+effects = ["Deals 5 damage per unique\ncard in your deck\n-The power of friendship","DMG: 8","Heal: 5 HP",
 "Uses all of the cards\nin your hand","doubles current shield",
 "Deals damage = shield\nRemoves all shield",
 "gives shield proportional\nto the world names length\nshouldnt see this",
@@ -140,9 +149,10 @@ effects = ["Deals 5 damage per unique\ncard in your deck\n-The power of friendsh
 "DMG: 2\nAdds a crab to your deck\n -your hand evolves\n  into crabs",
 "Activates a random card\n-Randomly generated",
 "Turns your hand into\nrandom cards",
-"Increases hand size by 1\nCard is removed from deck\nafteruse"
+"Increases hand size by 1\nCard is removed from deck\nafteruse",
+"Freezes enemy for 1.5\nseconds\n -lost his super suit","DMG: 3"
 ]
-spells = ["so this is the Demon\nKing's power","hiya", 
+spells = ["so this is the Demon\nKing's power","Kapow!", 
 "restore","time for an all out\nattack", "protection","charge!","shouldnt see this",
 """Summon before me the root
 of thy power hidden
@@ -155,16 +165,13 @@ EEEXPLOSION!!!""",
 "clack",
 randName(6),
 randName(5),
-"bigHandMode"
+"bigHandMode",
+"ice ice baby","ha"
 ]
 
 def setWorldName(name):
     spells[names.index("Druid")]=name
     effects[names.index("Druid")] = "Adds "+str(int(1.5*len(spells[names.index("Druid")])))+" shield"
-
-
-
-
 
 
 

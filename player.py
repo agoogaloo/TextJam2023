@@ -54,6 +54,8 @@ class Player:
 
         if self.health<=0:
             print("you failed, and the world has been destroyed :(")
+    def stun(self, time):
+        self.enemy.overTime-=time
 
     def attack(self, dmg):
         print("attacking with "+str(dmg))
