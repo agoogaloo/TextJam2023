@@ -33,14 +33,17 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
         
 1) Basic Bunch:
     - very average heros, with average stats
-2) Crab Commander:
+2) Defensive 
+    - shield based cards
+    - normal health
+3) Crab Commander:
     - lots of crabs
     - more health
     - did you know crabs are turing complete
-3) Chaotic Conjurer:
+4) Chaotic Conjurer:
     - embrace the randomness
     - random health and heros
-4) Hard Mode
+5) Hard Mode
     - small hand size
     - less health""")
 
@@ -53,17 +56,19 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
         if text.lower()=="1" or text.lower()=="Basic Bunch".lower():
             player = Player(name,[1,2,16],50)
             validInput = True
-
-        elif text.lower()=="2" or text.lower()=="Crab Commander".lower():
+        elif text.lower()=="2" or text.lower()=="Defensive".lower():
+            player = Player(name,[4,5,6],50)
+            validInput = True
+        elif text.lower()=="3" or text.lower()=="Crab Commander".lower():
             player = Player(name,[8,8,10,11],60)
             validInput = True
 
-        elif text.lower()=="3" or text.lower()=="Chaotic Conjurer".lower():
+        elif text.lower()=="4" or text.lower()=="Chaotic Conjurer".lower():
             deck = [12,13]
             for i in range(random.randrange(0,4)):
                 deck.append(random.randrange(0,len(cards.names)))
             player = Player(name,deck,random.randrange(30,100))
-        elif text.lower()=="4" or text.lower()=="Hard Mode".lower():
+        elif text.lower()=="5" or text.lower()=="Hard Mode".lower():
             player = Player(name,[1,17,1],35)
             player.handSize = 2
             validInput = True
