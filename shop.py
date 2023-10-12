@@ -1,6 +1,7 @@
 import random
 import cards
 import battle
+import time
 from enemy import Enemy
 
 
@@ -22,12 +23,13 @@ tips = ["If you have multiple of the same hero in your hand, you can summon all 
 def openShop(player, level, timer):
     finished = False
     options = createOptions()
+    startTime = time.time()
     while not finished:
         #options = createOptions()
         print("\n\n\n\n\n"+border)
         print("   -WELCOME TO THE SHOP-")
         if timer!=-1:
-             print("  -TIME: "+str(timer))
+            print("TIME: {:.3f} sec.".format(timer+time.time()-startTime))
         print("TIP: "+tips[random.randrange(0,len(tips))])
         print(border)
         
@@ -52,7 +54,7 @@ def openShop(player, level, timer):
         finished = selectOption(text, player, options, level)
     player.hand = []
     player.shield = 0
-    battle.makeBattle(player, Enemy(level+1), timer)
+    battle.makeBattle(player, Enemy(level+1), timer+time.time()-startTime)
             
 
 def selectOption(text, player,options, level):

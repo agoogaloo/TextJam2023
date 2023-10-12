@@ -140,7 +140,7 @@ def printBattle(hand, player, enemy, time):
         lines.append(statusBorder)
         print("\n\n\n")
         if time!=-1:
-            print("TIME: "+str(time))
+            print("TIME: {:.3f} sec.".format(time))
         print("  -- LEVEL "+str(enemy.level)+" --")
         for line in lines:
             print(line)

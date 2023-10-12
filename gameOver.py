@@ -8,7 +8,7 @@ def finishGame(player, level, time):
     print("\n\n\n\n"+"═"*65)
     print(player.name+" has been destroyed by the demon king and all hope is lost :(")
     if time!=-1:
-        print("TIME: "+str(time))
+        print("TIME: {:.3f} sec.".format(time))
     print("─"*65)
     print("your deck of candidates was:")
     for card in player.deck:
