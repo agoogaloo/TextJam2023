@@ -15,7 +15,7 @@ tips = ["If you have multiple of the same hero in your hand, you can summon all 
         "Making your deck bigger doesn't always mean it's better.",
         "Enemies don't stop attacking, even while you're summoning a hero. Don't stop typing!",
         "just because you only have 1 of a card in your deck, doesn't mean you can't have more than 1 in your hand",
-        "Theres no linit to your shield, but it resets every battle",
+        "Theres no limit to your shield, but it resets every battle",
         "Your shield will block any damage that would normally go to your health",
         "Type 'speedrun' when selecting a team to show the speedrun timer"]
 
@@ -23,6 +23,7 @@ def openShop(player, level, timer):
     finished = False
     options = createOptions()
     while not finished:
+        options = createOptions()
         print("\n\n\n\n\n"+border)
         print("   -WELCOME TO THE SHOP-")
         if timer!=-1:
@@ -32,18 +33,19 @@ def openShop(player, level, timer):
         
         #printing the current deck
         print("your current deck of candidates is:")    
-        for card in player.deck:
-            print(" -"+cards.names[card]+": "+cards.effects[card].replace("  ","").replace("\n", " "))
+        for i in range(len(player.deck)):
+            card = player.deck[i]
+            print("- " + str(i)+". "+cards.names[card]+": "+cards.effects[card].replace("  ","").replace("\n", " "))
         print("─"*35)
         line = player.name+" HP: "+str(player.health)+"/"+str(player.maxHealth)
         print(line+" "*(35-len(line))+"|")
         printCards(options)
        
         print("\n--CHOOSE AN OPTION--")
-        print(" - type 'add <hero name> to add a candidate to your deck and heal to max hp")
+        print(" - type 'add <card number/hero name> to add a candidate to your deck and heal to max hp")
         print(" - type 'health up' to increase max health by "+str(15))
         if len(player.deck)>3:
-            print(" - type 'remove <hero name>' to remove a candidate from your deck")    
+            print(" - type 'remove <card number/hero name>' to remove a candidate from your deck")    
 
    
         text = input()
@@ -62,6 +64,11 @@ def selectOption(text, player,options, level):
     elif text.lower().find("remove ")!=-1 and len(player.deck)>3:
         text = text.replace("remove ", "")
         success = False
+        
+        if text.isdecimal() and int(text)<len(player.deck):
+            player.removeFromDeck(player.deck[int(text)])
+            return True
+        
         for card in player.deck:
             if cards.names[card].lower()==text.lower():
                 print("removing card")
@@ -73,8 +80,13 @@ def selectOption(text, player,options, level):
     elif text.lower().find("add ")!=-1:
         text = text.replace("add ", "")
         #text = text.replace(" ", "")
+        if text=="0" or text=="1" or text=="2":
+            player.addToDeck(options[int(text)])
+            player.health = player.maxHealth
+            return True
+        
         for card in options:
-             print("checkin card")
+             print("checkin card")                  
              if cards.names[card].lower()==text.lower():
                   player.addToDeck(card)
                   player.health = player.maxHealth
@@ -88,7 +100,8 @@ def createOptions():
         done = False
         card = 0
         while not done:
-            card = random.randrange(0,len(cards.names))
+            #the last 2 cards shouldn't show up so that you need to evolve them instead of buying them
+            card = random.randrange(0,len(cards.names)-2)
             if options.count(card)==0:
                  done = True
         options.append(card)    
@@ -98,7 +111,8 @@ def printCards(hand):
     #creating the names of the cards
     names = "║"
     for card in hand:
-        nameSize = len(cards.names[card])
+        names+=" "+str(hand.index(card))
+        nameSize = len(cards.names[card])+2
         spaceUsed =int((cardWidth-nameSize)/2)
         names+=" "*(spaceUsed)
         names+=cards.names[card]

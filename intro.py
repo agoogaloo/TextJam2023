@@ -1,4 +1,5 @@
 import battle
+import shop
 import cards
 import random
 from enemy import Enemy
@@ -15,7 +16,7 @@ def start():
             valid = True
     print("\n\n\nWelcome to "+name+""". The Demon King has risen once again, 
 and you must summon legendary heros to save it. Unfortunately they're 
-so weak they won't be able to more than one thing before they're slain.
+so weak they won't be able to do more than one thing before they're slain.
 death is the first step to reincarnation though, so just summon them back
 and everything will be fine! \n\n -ENTER TO CONTINUE""")
     input()  
@@ -63,11 +64,11 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
                 deck.append(random.randrange(0,len(cards.names)))
             player = Player(name,deck,random.randrange(30,100))
         elif text.lower()=="4" or text.lower()=="Hard Mode".lower():
-            player = Player(name,[1,9,11],40)
+            player = Player(name,[1,17,1],35)
             player.handSize = 2
             validInput = True
         elif text=="test":
-            player = Player(name,[5,6,6],100)
+            player = Player(name,[17,1,2],100)
             validInput = True
         elif text.lower() =="speedrun":
             timer = True
@@ -78,5 +79,6 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
     if timer:
         battle.makeBattle(player, Enemy(1), 0.0)
     else:
+        #shop.openShop(player,0,-1)
         battle.makeBattle(player, Enemy(1), -1)
 

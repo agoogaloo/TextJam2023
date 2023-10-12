@@ -23,7 +23,7 @@ class Player:
         card = self.cardsToDraw[index]
         self.hand.append(card)
         self.cardsToDraw.pop(index)
-       
+        print("Deck:" +str(self.deck)+" undrawn cards:"+str(self.cardsToDraw))
        
        
     def addToDeck(self, card):
@@ -45,7 +45,7 @@ class Player:
     
         
     def damage(self, dmg):
-        print("dealaing "+str(dmg)+" to "+str(self.shield)+" shield")
+        print("dealing "+str(dmg)+" damage to "+str(self.shield)+" shield")
         self.shield-=dmg
 
         if self.shield<0:

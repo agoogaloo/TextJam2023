@@ -9,13 +9,15 @@ easyAttacks = [["wished to was a crab", "clacked weakly", "probably isnt turing 
 easyDeaths = ["felt sorry and left","were scared away","somehow got lost",
               "found a sidequest to do instead","left to go on a beach episode"]
 hardNames = ["Brachyura", "Dragon", "Demon"]
-hardAttacks = [["clicked and clacked", "used its crab powers"],["started a bunch of fires", "flies around"],["is being a bad guy"]]
+hardAttacks = [["clicked and clacked","starts turning things to crabs", "used its crab powers"],
+               ["started a bunch of fires", "flies around", "is king of the lair"],
+               ["is being a bad guy","destroys a village","has a gun"]]
 hardDeaths = ["were burned to a crisp","got crushed","forgot the power of friendship",
               "wished they would stop getting reincarnated","didn't get back up"]
-bossAttacks = ["sends his regards", "went all out just this once", "is destroying everything"]
+bossAttacks = ["sends his regards", "went all out just this once", "is destroying everything","has another phase"]
 
 waitingLines = ["is waiting for something to happen", "is standing there peacefully", "looks lost in thought", 
-                "doesnt notice you","is standing there menacingly"]
+                "doesnt notice you","is standing there menacingly", "is looking for a fight"]
 stunLines = ["forgets who they are", "is stunned", "stands still so you don't see them"]
 
 bossLevel = 7
