@@ -15,7 +15,7 @@ def makeBattle(player, enemy, timer):
     player.targetEnemy(enemy)
     #draw 3 random starting cards
     for i in range(player.handSize):
-        player.draw()
+        player.draw(True)
 
     exitFunc = None
     enemyAttack = enemy.getWaitingQuote()

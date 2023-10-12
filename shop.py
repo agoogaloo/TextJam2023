@@ -23,7 +23,7 @@ def openShop(player, level, timer):
     finished = False
     options = createOptions()
     while not finished:
-        options = createOptions()
+        #options = createOptions()
         print("\n\n\n\n\n"+border)
         print("   -WELCOME TO THE SHOP-")
         if timer!=-1:

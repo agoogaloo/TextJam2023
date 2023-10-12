@@ -20,20 +20,20 @@ so weak they won't be able to do more than one thing before they're slain.
 death is the first step to reincarnation though, so just summon them back
 and everything will be fine! \n\n -ENTER TO CONTINUE""")
     input()  
-
-    print("""     ─══ How To Play ══─
-    - you will have 3 hero canidates in your hand, type out the special incantation (case sensitive) 
+    #print("\n\n\n\n\n\n\n\n "+"─"*80)
+    print("\n\n\n\n\n\n  "+"─"*40+"─══ How To Play ══─"+"─"*40+"""
+    - You will have 3 hero canidates in your hand, type out the special incantation (case sensitive) 
       on their card to summon them to the world of """+name+"""
-    - when you summon a hero they will only be able to attack/do an action once before they are killed
-    - the enemy will continuously destroy the world reducing its HP, even while you are in the middle 
+    - When you summon a hero they will only be able to attack/do an action once before they are killed
+    - The enemy will continuously destroy the world reducing its HP, even while you are in the middle 
       of summoning a hero. Summon heros to kill the enemy before it destroys the world.
-    - kill the Demon King's 6 evil minions in order to facce the Demon King himself and save """+name)
-    print(" "+"─"*50)
+    - Kill the Demon King's 6 evil minions in order to face the Demon King himself and save """+name)
+    print(" "+"─"*100)
     print("""what types of heros are you looking for?
         
 1) Basic Bunch:
     - very average heros, with average stats
-2) Defensive 
+2) Defence Dudes
     - shield based cards
     - normal health
 3) Crab Commander:
@@ -56,7 +56,7 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
         if text.lower()=="1" or text.lower()=="Basic Bunch".lower():
             player = Player(name,[1,2,16],50)
             validInput = True
-        elif text.lower()=="2" or text.lower()=="Defensive".lower():
+        elif text.lower()=="2" or text.lower()=="Defence Dudes".lower():
             player = Player(name,[4,5,6],50)
             validInput = True
         elif text.lower()=="3" or text.lower()=="Crab Commander".lower():
@@ -73,7 +73,7 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
             player.handSize = 2
             validInput = True
         elif text=="test":
-            player = Player(name,[17,1,2],100)
+            player = Player(name,[7,1,2],100)
             validInput = True
         elif text.lower() =="speedrun":
             timer = True

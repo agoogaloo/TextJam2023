@@ -15,12 +15,22 @@ class Player:
             cards.setWorldName(name)
     def targetEnemy(self, enemy):
          self.enemy = enemy
-    def draw(self): 
-        if len(self.cardsToDraw)==0:
-            self.cardsToDraw = self.deck.copy()
-            print("reshuffling")
-        index = random.randrange(0,len(self.cardsToDraw))
-        card = self.cardsToDraw[index]
+    def draw(self, startHand = False): 
+        megumin = True    
+        #making it so you cant draw megumin in the starting hand because thats too strong     
+        while megumin:
+            megumin = False
+            if len(self.cardsToDraw)==0:
+                self.cardsToDraw = self.deck.copy()
+                print("reshuffling")
+            index = random.randrange(0,len(self.cardsToDraw))
+            card = self.cardsToDraw[index]
+            if startHand and cards.names[card]=="Crimson Demon":
+                print("not letting you start with that one"+str(card)+str(self.cardsToDraw))
+                self.cardsToDraw.pop(index)
+                #Summon before me the root of thy power hidden within the lands of the kingdom of demise! EEEXPLOSION!!!
+                megumin = True
+            
         self.hand.append(card)
         self.cardsToDraw.pop(index)
         print("Deck:" +str(self.deck)+" undrawn cards:"+str(self.cardsToDraw))

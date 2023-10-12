@@ -181,7 +181,7 @@ effects = ["Deals 5 damage per unique\ncard in your deck\n-The power of friendsh
 "Uses all of the cards\nin your hand","doubles current shield",
 "Deals damage = shield\nRemoves all shield",
 "gives shield proportional\nto the world names length\nshouldnt see this",
-"DMG: 99\nCreates the perfect\nexplosion",
+"DMG: 99\nCan't be drawn on your\nfirst hand",
 "Deals 10 damage per crab\nin your hand\n",
 "Sacrifices all crab cards\nin your deck, dealing 5\ndamage each\nAdds a crab to your deck",
 "Adds 2 crab cards to your\ndeck\n -Crabs for the crab god", 
