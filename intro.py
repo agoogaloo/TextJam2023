@@ -33,6 +33,7 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
         
 1) Basic Bunch:
     - very average heros, with average stats
+    - good for learning the game
 2) Defence Dudes
     - shield based cards
     - normal health
