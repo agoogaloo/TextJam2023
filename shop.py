@@ -54,6 +54,8 @@ def openShop(player, level, timer):
         finished = selectOption(text, player, options, level)
     player.hand = []
     player.shield = 0
+    if timer==-1:
+        battle.makeBattle(player, Enemy(level+1), -1) 
     battle.makeBattle(player, Enemy(level+1), timer+time.time()-startTime)
             
 
