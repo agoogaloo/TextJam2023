@@ -68,12 +68,13 @@ and everything will be fine! \n\n -ENTER TO CONTINUE""")
             for i in range(random.randrange(0,4)):
                 deck.append(random.randrange(0,len(cards.names)))
             player = Player(name,deck,random.randrange(30,100))
+            validInput = True
         elif text.lower()=="5" or text.lower()=="Hard Mode".lower():
             player = Player(name,[1,17,1],35)
             player.handSize = 2
             validInput = True
         elif text=="test":
-            player = Player(name,[7,1,2],100)
+            player = Player(name,[i for i in range(len(cards.names)-2)],100)
             validInput = True
         elif text.lower() =="speedrun":
             timer = True
